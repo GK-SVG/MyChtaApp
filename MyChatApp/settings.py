@@ -69,8 +69,20 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'MyChatApp.wsgi.application'
+# WSGI_APPLICATION = 'MyChatApp.wsgi.application'
 
+# Add Channels as the ASGI backend
+ASGI_APPLICATION = 'MyChatApp.asgi.application'
+
+# Configure Channels to use Redis as a channel layer
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],  # Redis server
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
